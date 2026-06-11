@@ -1,9 +1,11 @@
-const CACHE_NAME = "crypto-engine-cache-v1";
+const CACHE_NAME = "crypto-engine-cache-v2";
+const BASE_PATH = new URL(self.registration.scope).pathname.replace(/\/$/, "");
+const APP_SHELL = `${BASE_PATH}/`;
 const ASSETS = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/icon.svg"
+  APP_SHELL,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/manifest.json`,
+  `${BASE_PATH}/icon.svg`
 ];
 
 // Instala el Service Worker y guarda en caché archivos esenciales
@@ -71,7 +73,7 @@ self.addEventListener("fetch", (event) => {
         .catch(() => {
           // Si falla internet y busca navegación, devolvemos la página inicial
           if (event.request.mode === "navigate") {
-            return caches.match("/");
+            return caches.match(APP_SHELL);
           }
         });
     })
