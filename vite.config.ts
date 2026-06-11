@@ -5,6 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    base: '/app-genera-claves/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
